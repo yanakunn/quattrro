@@ -1,0 +1,75 @@
+﻿@model Project_AkmalRentals.Models.tb_room
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    .column1 {
+        width: 300px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.viewer.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.viewer.min.js"></script>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">ROOM DETAILS</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0">
+                        <div>
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        Location Code
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.f_floor)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Room
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.f_room)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Price (RM)
+                                    </th>
+                                    <td>
+                                        RM @Html.DisplayFor(model => model.f_price)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.tb_status.s_desc)
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.f_id }, new { @class = "btn btn-dark-blue" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,248 @@
+﻿@model Project_AkmalRentals.ViewModel.Services
+@{
+    ViewBag.Title = "Service";
+}
+
+<!--
+=========================================================
+* Material Dashboard 2 - v3.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+
+
+<div class="page-header min-height-200 border-radius-xl mt-4" style="background-image: url('/Content/assets/img/bg1.jpg');">
+    <h3 class="text-white mb-6 offset-4" style="position: relative; z-index: 1;">Services Dashboard</h3>
+    <span class="mask  bg-gradient-dark  opacity-6"></span>
+</div>
+
+<div class="row mx-3 mt-n6">
+    <div class="col-md-4 col-4">
+        <div class="card card-body blur shadow-blur overflow-hidden">
+            <div class="row gx-4">
+                <div class="col-auto my-auto">
+                    <div class="h-100">
+                        <h5 class="mb-0 font-weight-bolder">Attendance List</h5>
+                        <p class="mb-1">Create & View Attendance List</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                    <div class="nav-wrapper position-relative end-0">
+                        <div class="text-end">
+                            <a href="@Url.Action("Index", "Attendance")" data-bs-toggle="tooltip" data-bs-placement="top" title="View Attendance List"><i class="material-icons me-2">arrow_forward_ios</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-4">
+        <div class="card card-body blur shadow-blur overflow-hidden">
+            <div class="row gx-4">
+                <div class="col-auto my-auto">
+                    <div class="h-100">
+                        <h5 class="mb-0 font-weight-bolder">Attendance Report</h5>
+                        <p class="mb-1">View Monthly Attendance</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                    <div class="nav-wrapper position-relative end-0">
+                        <div class="text-end">
+                            <a href="@Url.Action("AttendanceTable", "AttendanceTable") " data-bs-toggle="tooltip" data-bs-placement="top" title="View Attendance Report"><i class="material-icons me-2">arrow_forward_ios</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-4">
+        <div class="card card-body blur shadow-blur overflow-hidden">
+            <div class="row gx-4">
+                <div class="col-auto my-auto">
+                    <div class="h-100">
+                        <h5 class="mb-0 font-weight-bolder">Landlord List</h5>
+                        <p class="mb-1">Create & View Landlord List</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                    <div class="nav-wrapper position-relative end-0">
+                        <div class="text-end">
+                            <a href="@Url.Action("Index", "Landlord")" data-bs-toggle="tooltip" data-bs-placement="top" title="View Landlord List"><i class="material-icons me-2">arrow_forward_ios</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<style>
+    .clickable-row:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+    });</script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+@{
+    ViewBag.Title = "Rent Reminder";
+    var today = DateTime.Today;
+    var formattedDate = today.ToString("MMMM dd, yyyy");   
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0 ">
+                    <div class="bg-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <div class="row">
+                            <div class="col-lg-6 col-7">
+                                <h6 class="text-white text-capitalize ps-3">
+                                    Today's Date: @formattedDate
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <p class="text-sm mb-0">
+                                <i class="fa fa-check text-info" aria-hidden="true"></i>
+                                <span class="font-weight-bold ms-1">Landlord Payment</span> Reminder
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table table-sm text-center">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Landlord</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Location</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Amount Due</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Days Due</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Landlord)
+                                {
+                                    <tr class="clickable-row" data-href="@Url.Action("Details", "Landlord", new { id = item.l_id })">
+
+                                        <td class="align-middle">
+                                            <div class="float-right">
+                                                @Html.DisplayFor(modelItem => item.l_name)
+                                            </div>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @Html.DisplayFor(modelItem => item.tb_floor.y_location)
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @Html.DisplayFor(modelItem => item.l_rentalAmount)
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @{
+                                                TimeSpan timeUntilContractEnd = item.l_ctrctEndDate - DateTime.Now;
+                                                int daysUntilContractEnd = (int)timeUntilContractEnd.TotalDays;
+                                            }@daysUntilContractEnd
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-7">
+                            <h5><span class="font-weight-bold ms-1">Cleaner List</span></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <table class="table table-sm text-center">
+                        <div class=" ms-sm-3 input-group input-group-outline">
+                            <input type="text" id="searchInput" placeholder="Search Cleaner">
+                            <span class="ms-sm-3 ">
+                                <a href="@Url.Action("Create", "Services")" class="material-symbols-outlined " class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Cleaner">
+                                    add_box
+                                </a>
+                            </span>
+                        </div>
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Name</th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Agency</th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Location Code</th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Cleaners)
+                            {
+                                <tr class="clickable-row" data-href="@Url.Action("Details", "Cleaner", new { id = item.c_id })">
+
+                                    <td class="align-middle">
+                                        <div class="float-right">
+                                            @Html.DisplayFor(modelItem => item.c_name)
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        @Html.DisplayFor(modelItem => item.c_company)
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        @Html.DisplayFor(modelItem => item.tb_floor.y_location)
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="@Url.Action("Edit", "Cleaner", new { id = item.c_id })" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Item">edit</a>
+
+
+                                        <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Item">
+                                            <a href="@Url.Action("Delete", "Cleaner", new { id = item.c_id })">delete</a>
+                                        </span>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

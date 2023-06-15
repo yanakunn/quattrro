@@ -1,0 +1,235 @@
+﻿@using System.Globalization
+
+@model IEnumerable<Project_AkmalRentals.Models.tb_expenses>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"   />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+<style>
+    .clickable-row:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        function filterTableRows() {
+            var yearFilter = $("#yearFilter").val();
+            var monthFilter = $("#monthFilter").val();
+            var categoryFilter = $("#categoryFilter").val();
+
+            $("table tbody tr").each(function () {
+                var row = $(this);
+                var year = row.find("td:nth-child(2)").text().trim();
+                var month = row.find("td:nth-child(3)").text().trim();
+                var category = row.find("td:nth-child(4)").text().trim();
+
+                var yearMatch = yearFilter === "" || year === yearFilter;
+                var monthMatch = monthFilter === "" || month === monthFilter;
+                var categoryMatch = categoryFilter === "" || category.includes(categoryFilter);
+
+                row.toggle(yearMatch && monthMatch && categoryMatch);
+            });
+
+            // Calculate total profit
+            var totalIncome = 0;
+            var totalExpenses = 0;
+
+            $("table tbody tr:visible").each(function () {
+                var row = $(this);
+                var amount = parseFloat(row.find("td:nth-child(7)").text().replace("RM ", ""));
+                var type = row.find("td:nth-child(1)").text().trim();
+
+                if (type === "Income") {
+                    totalIncome += amount;
+                } else if (type === "Expenses") {
+                    totalExpenses += amount;
+                }
+            });
+
+            var totalProfit = totalIncome - totalExpenses;
+            var totalAmountCell = $("table tbody .total-amount");
+
+            totalAmountCell.text("RM " + Math.abs(totalProfit));
+            totalAmountCell.css("color", totalProfit < 0 ? "red" : "green");
+        }
+
+        $("#yearFilter, #monthFilter, #categoryFilter").on("change", function () {
+            filterTableRows();
+        });
+
+
+
+        filterTableRows();
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
+<script>
+    function openFilePopup(url) {
+        window.open(url, "_blank", "width=800,height=600");
+    }
+</script>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Manage Finance</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0" id="dataTableContainer">
+
+                        <!-- Start Add New Income/Expenses-->
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-start pe-3">
+                                <span class="ms-sm-3">
+                                    <a href="@Url.Action("Create")" class="material-symbols-outlined material-icons text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="+ Income/Expense">
+                                        add_box
+                                    </a>
+                                </span>
+                                <span class="ms-sm-3">
+                                    <a href="@Url.Action("Index", "Category")" class="material-symbols-outlined material-icons text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="+ Category">
+                                        playlist_add
+                                    </a>
+                                </span>
+                            </div>
+
+                            <!-- End Add New Income/Expenses -->
+                            <!-- Start filter-->
+                            @{
+                                int currentYear = DateTime.Now.Year;
+                                List<int> years = Enumerable.Range(currentYear - 4, 6).ToList();
+                            }
+                            @{
+                                List<string> months = DateTimeFormatInfo.CurrentInfo.MonthNames.Where(m => !string.IsNullOrEmpty(m)).ToList();
+                            }
+                            <div class="d-flex justify-content-end">
+                                <div class="form-group mx-3">
+                                    <select id="yearFilter" class="form-select" aria-label="Year Filter">
+                                        <option value="">-- All Years --</option>
+                                        @foreach (var year in years)
+                                        {
+                                            <option value="@year">@year</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group mx-3">
+                                    <select id="monthFilter" class="form-select" aria-label="Month Filter">
+                                        <option value="">-- All Months --</option>
+                                        @foreach (var month in months)
+                                        {
+                                            <option value="@month">@month</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group mx-3">
+                                    <select id="categoryFilter" class="form-select" aria-label="Category Filter">
+                                        <option value="">-- All Categories --</option>
+                                        @foreach (var category in Model.Select(item => item.tb_category.cat_desc).Distinct())
+                                        {
+                                            if (!string.IsNullOrEmpty(category))
+                                            {
+                                                <option value="@category">@category</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End filter -->
+
+                        <table class="table align-items-center mb-0" id="expensesTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Type")</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">@Html.Label("Year")</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">@Html.Label("Month")</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Category")</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Payment")</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Detail")</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Amount")</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Receipt")</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.e_id })">
+                                        <td class="align-middle">
+                                            <div class="float-right">
+                                                @Html.DisplayFor(modelItem => item.e_Type)
+                                            </div>
+                                        </td>
+                                        <td class="align-middle"> 
+                                            <span>@item.e_Date.Year</span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <span>@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.e_Date.Month)</span>
+                                        </td>
+
+                                        <td class="align-middle text-center">
+                                            @Html.DisplayFor(modelItem => item.tb_category.cat_desc)
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @Html.DisplayFor(modelItem => item.e_Payment)
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @Html.DisplayFor(modelItem => item.e_Detail)
+                                        </td>
+                                        <td class="align-middle text-center" style="color: @(item.e_Type == "Income" ? "green" : "red")">
+                                            RM @Html.DisplayFor(modelItem => item.e_Amount)
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <a href="javascript:void(0);" onclick="openFilePopup('@Url.Content("~/Receipt/")@item.e_Receipt')">
+                                                <i class="fas fa-file"></i> Receipt
+                                            </a>
+                                        </td>
+
+                                        <td class="align-middle text-center">
+                                            <a href="@Url.Action("Edit", new { id = item.e_id })" class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">edit</a>
+                                            <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.e_id })
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    @{
+                                        var income = Model.Where(e => e.e_Type == "Income").Sum(e => e.e_Amount);
+                                        var expenses = Model.Where(e => e.e_Type == "Expenses").Sum(e => e.e_Amount);
+                                        var profit = income - expenses;
+                                    }
+                                    <td colspan="6"><strong>Profit</strong></td>
+                                    <td class="align-middle text-center total-amount" style="color: @(profit < 0 ? "red" : "green")">
+                                        <strong>RM @(Math.Abs(profit))</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

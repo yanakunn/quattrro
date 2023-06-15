@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="98e4187de69e44fead2f448443453f94" Name="Diagram1" ZoomLevel="40">
+        <EntityTypeShape EntityType="db_akmalrentalsModel.sysdiagram" Width="1.5" PointX="10.75" PointY="8.75" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_attendance" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_attendanceStatus" Width="1.5" PointX="3" PointY="16.5" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_building" Width="1.5" PointX="8" PointY="10.25" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_category" Width="1.5" PointX="10.75" PointY="5.5" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_cleaner" Width="1.5" PointX="3" PointY="10.25" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_expenses" Width="1.5" PointX="13" PointY="5" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_floor" Width="1.5" PointX="0.75" PointY="5.875" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_inventory" Width="1.5" PointX="3" PointY="13.25" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_investor" Width="1.5" PointX="10.25" PointY="1" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_landlord" Width="1.5" PointX="3" PointY="3.25" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_payment" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_profit" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_role" Width="1.5" PointX="5.75" PointY="1.375" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_room" Width="1.5" PointX="6" PointY="6.125" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_share" Width="1.5" PointX="12.5" PointY="1.125" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_status" Width="1.5" PointX="3.75" PointY="6.625" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_tenant" Width="1.5" PointX="8.25" PointY="5.875" />
+        <EntityTypeShape EntityType="db_akmalrentalsModel.tb_user" Width="1.5" PointX="8" PointY="1" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_attendance_tb_attendanceStatus" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_attendance_tb_cleaner" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_investor_tb_building" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_expenses_tb_category" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_cleaner_tb_floor" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_inventory_tb_floor" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_landlord_tb_landlord" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_room_tb_floor" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_investor_tb_user" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_share_tb_investor" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_user_tb_role" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_room_tb_status" />
+        <AssociationConnector Association="db_akmalrentalsModel.FK_tb_tenant_tb_room" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

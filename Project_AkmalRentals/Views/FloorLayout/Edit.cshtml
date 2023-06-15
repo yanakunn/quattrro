@@ -1,0 +1,70 @@
+﻿@model Project_AkmalRentals.Models.tb_floor
+
+@{
+    ViewBag.Title = "Edit Details";
+}
+<style>
+    .form-container {
+        padding-left: 20px; /* Adjust the value as needed */
+    }
+
+    .column1 {
+        width: 200px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">EDIT LAYOUT DETAILS</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0">
+                        @using (Html.BeginForm("Edit", "FloorLayout", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <table class="table align-items-center mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td class="column1">@Html.LabelFor(model => model.y_location, "Location Code", htmlAttributes: new { @class = "control-label" })
+                                        <td><div class="input-group input-group-outline my-3">@Html.EditorFor(model => model.y_location, "", new { @class = "form-control" })</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column1">@Html.LabelFor(model => model.y_address, "Location Code", htmlAttributes: new { @class = "control-label" })
+                                        <td><div class="input-group input-group-outline my-3">@Html.EditorFor(model => model.y_address, "", new { @class = "form-control" })</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column1">@Html.LabelFor(model => model.y_desc, "Description", htmlAttributes: new { @class = "control-label" })</td>
+                                        <td><div class="input-group input-group-outline my-3">@Html.TextAreaFor(model => model.y_desc, new { htmlAttributes = new { @class = "form-control" } })</div></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <br />
+                            <div class="form-group">
+                                @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                                <input type="submit" value="Save" class="btn btn-dark-blue" />
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

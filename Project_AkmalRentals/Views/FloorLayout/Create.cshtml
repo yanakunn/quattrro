@@ -1,0 +1,93 @@
+﻿@model Project_AkmalRentals.Models.tb_floor
+
+@{
+    ViewBag.Title = "Add Floor Layout";
+}
+<style>
+    .form-container {
+        padding-left: 20px; /* Adjust the value as needed */
+    }
+
+    .column1 {
+        width: 200px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">ADD NEW LAYOUT</h6>
+                    </div>
+                </div>
+                <div class="table-responsive p-0">
+                    @using (Html.BeginForm("Create", "FloorLayout", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <table class="table align-items-center mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="column1">@Html.LabelFor(model => model.y_location, "Location", htmlAttributes: new { @class = "control-label" })</td>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.EditorFor(model => model.y_location, "", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.y_location, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="column1">@Html.LabelFor(model => model.y_address, "Address", htmlAttributes: new { @class = "control-label" })</td>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.EditorFor(model => model.y_address, "", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.y_address, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="column1">@Html.LabelFor(model => model.y_floor, "Floor Layout", htmlAttributes: new { @class = "control-label" })</td>
+                                    <td>
+                                        @Html.TextBox("file1", "", new { type = "file", @class = "form-control" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="column1">@Html.LabelFor(model => model.y_desc, "Description", htmlAttributes: new { @class = "control-label" })</td>
+                                    <td>
+                                        @Html.TextAreaFor(model => model.y_desc, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.y_desc, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="column1">@Html.LabelFor(model => model.y_cctvqr, "CCTV QR", htmlAttributes: new { @class = "control-label" })</td>
+                                    <td>
+                                        @Html.TextBox("file2", "", new { type = "file", @class = "form-control" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <br />
+                                        <div class="col-md-offset-2 col-md-10">
+                                            @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                                            <input type="submit" value="Create" class="btn btn-dark-blue " />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

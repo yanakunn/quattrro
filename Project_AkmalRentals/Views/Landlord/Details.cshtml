@@ -1,0 +1,93 @@
+﻿@model Project_AkmalRentals.Models.tb_landlord
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    .column1 {
+        width: 300px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.viewer.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.viewer.min.js"></script>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">LANDLORD DETAILS</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.l_name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Mobile No.
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.l_contact)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Contract Start Date
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.l_ctrctStartDate)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Contract End Date
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.l_ctrctEndDate)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Rental Amount (in RM)
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.l_rentalAmount)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Location
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.tb_floor.y_location)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.l_id }, new { @class = "btn btn-outline-dark" })
+                            <input type="button" value="Back To List" class="btn btn-dark-blue" onclick="@("window.location.href='" + @Url.Action("Service", "Services") + "'");" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

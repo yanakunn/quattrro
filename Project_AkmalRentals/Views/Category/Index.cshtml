@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Project_AkmalRentals.Models.tb_category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"   />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<style>
+    .clickable-row:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Category</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0">
+
+                        <!-- Start Add New Income/Expenses-->
+                        <div class="d-flex justify-content-start pe-3">
+                            <span class="ms-sm-3">
+                                <a href="@Url.Action("Create")" class="material-symbols-outlined material-icons text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="+ Income/Expense">
+                                    add_box
+                                </a>
+                            </span>
+                        </div>
+                        <!-- End Add New Income/Expenses -->
+
+
+                        <table class="table align-items-center mb-0">
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cat_desc)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.cat_id }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.cat_id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.cat_id })
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                        <p>
+                            @Html.ActionLink("Back to List", "Index", "Expenses", null, new { @class = "btn btn-outline-dark" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

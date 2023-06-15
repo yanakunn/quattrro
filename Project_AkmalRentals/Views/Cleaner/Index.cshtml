@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Project_AkmalRentals.Models.tb_cleaner>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--
+=========================================================
+* Material Dashboard 2 - v3.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+
+<h2>Manage Services</h2>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Attendance List" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Index", "Attendance") + "'");" />
+        <input type="button" value="Attendance Report" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AttendanceTable", "AttendanceTable") + "'");" />
+        <input type="button" value="Landlord List" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Index", "Landlord") + "'");" />
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<style>
+    .clickable-row:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+    });</script>
+
+<!--@Html.ActionLink("Add New Cleaner", "Create", null, new { @class = "btn btn-primary" })-->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Cleaner Lists</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table table-sm text-center">
+                            <span class="ms-sm-5  ">
+                                <a href="@Url.Action("Create")" class="material-symbols-outlined" class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Cleaner">
+                                    add_box
+                                </a>
+                            </span>
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Name</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Agency</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Location Code</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.c_id })">
+
+                                        <td class="align-middle">
+                                            <div class="float-right">
+                                                @Html.DisplayFor(modelItem => item.c_name)
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            @Html.DisplayFor(modelItem => item.c_company)
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @Html.DisplayFor(modelItem => item.tb_floor.y_location)
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <input type="button" value="Edit" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Index", "Attendance") + "'");" />
+                                            <a href="@Url.Action("Edit", new { id = item.c_id })" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Item">edit</a>
+                                            <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Item">
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.c_id })
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+
+

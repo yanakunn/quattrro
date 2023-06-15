@@ -1,0 +1,83 @@
+﻿@model Project_AkmalRentals.Models.tb_inventory
+
+@{
+    ViewBag.Title = "Edit Details";
+}
+
+<style>
+    .column1 {
+        width: 100px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3"> Edit Item</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.v_id)
+
+                            <table class="table align-items-center mb-0">
+                                <tr>
+                                    <td class="column1">@Html.LabelFor(model => model.v_location)</td>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.DropDownList("v_location" , null, "-- Select Location --",htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.v_location, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="column1">@Html.LabelFor(model => model.v_item)</td>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.EditorFor(model => model.v_item, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.v_item, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="column1">@Html.LabelFor(model => model.v_quantity)</td>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.EditorFor(model => model.v_quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.v_quantity, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <div class="form-group">
+                                @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                                <input type="submit" value="Save" class="btn btn-dark-blue" />
+                            </div>
+
+                        </div>         }
+
+
+                        
+
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

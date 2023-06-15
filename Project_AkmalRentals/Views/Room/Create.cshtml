@@ -1,0 +1,100 @@
+﻿@model Project_AkmalRentals.Models.tb_room
+
+@{
+    ViewBag.Title = "Add Room";
+}
+
+<style>
+    .column1 {
+        width: 100px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-dark-blue shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Details</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <table class="table align-items-center mb-0">
+                                <tr>
+                                    <th class="column1">
+                                        @Html.LabelFor(model => model.f_floor, "Floor", htmlAttributes: new { @class = "control-label" })
+                                    </th>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.DropDownList("f_floor", null,"-- Select Location --", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.tb_floor.y_location, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="column1">
+                                        @Html.LabelFor(model => model.f_room, "Room", htmlAttributes: new { @class = "control-label" })
+                                    </th>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.EditorFor(model => model.f_room, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.f_room, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="column1">
+                                        @Html.LabelFor(model => model.f_price, "Price (RM)", htmlAttributes: new { @class = "control-label" })
+                                    </th>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">                                            
+                                            @Html.EditorFor(model => model.f_price, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.f_price, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="column1">
+                                        @Html.LabelFor(model => model.f_status, "Status", htmlAttributes: new { @class = "control-label" })
+                                    </th>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.DropDownList("f_status", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.f_status, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div class="form-group">
+                                @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+
+
+                                <input type="submit" value="Create" class="btn btn-dark-blue " />
+                            </div>
+                        </div>
+                        }
+
+                     
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

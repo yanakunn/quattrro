@@ -1,0 +1,118 @@
+﻿@model Project_AkmalRentals.Models.tb_investor
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.Main = "Investors";
+    ViewBag.Text = "Add Investor Details";
+}
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">@ViewBag.Main</a></li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">@ViewBag.Title</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">@ViewBag.Title</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Search</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <a href="@Url.Action("Profile","Account", new { id = Session["uid"] })" class="nav-link text-body font-weight-bold px-0">
+                        <i class="fa fa-user me-sm-1"></i>
+                        <span class="d-sm-inline d-none">@Session["name"]</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+
+<div class="row">
+    <div class="col-md-6 col-6">
+        <div class="col-md-12 mb-lg-0 mb-4 offset-5">
+            <div class="card mt-4">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center">
+                            <h6 class="mb-3">@ViewBag.Text</h6>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <div class="row">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="d-flex flex-column">
+                                <div class="card card-body border card-plain border-radius-lg d-flex">
+
+                                    <div class="form-horizontal">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="input-group input-group-outline my-3">
+                                            <div class="col-md-4 d-flex align-baseline align-content-lg-start">
+                                                @Html.LabelFor(model => model.i_id, htmlAttributes: new { @class = "control-label" })
+                                                <i class="material-icons opacity-10 text-sm ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="You have to register user as Investor first if the list is empty">info</i>
+                                            </div>
+                                            <div class="col-md-12">
+                                                @Html.DropDownList("i_id", null, "Select Investor", htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.i_id, "", new { @class = "text-danger text-sm" })
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group input-group-outline my-3">
+                                            <div class="col-md-4 d-flex align-baseline align-content-lg-start">
+                                                @Html.LabelFor(model => model.i_investment, htmlAttributes: new { @class = "control-label" })
+                                                <span class="text-xs text-dark ms-1">(RM)</span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.i_investment, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.i_investment, "", new { @class = "text-danger text-sm" })
+                                                <span class="text-sm text-danger">@ViewBag.maxError</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="input-group input-group-outline my-3">
+                                            <div class="col-md-4 d-flex align-baseline align-content-lg-start">
+                                                @Html.LabelFor(model => model.i_lot, htmlAttributes: new { @class = "control-label" })
+                                                <i class="material-icons opacity-10 text-sm ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="You have to add a building lot for investment first if the list is empty">info</i>
+                                            </div>
+                                            <div class="col-md-12">
+                                                @Html.DropDownList("i_lot", null, "Select Lot", htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.i_lot, "", new { @class = "text-danger text-sm" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions mt-3">
+                                <a class="btn btn-outline-dark btn-sm" href="@Url.Action("Index")">Back</a>
+                                <input type="submit" value="Submit" class="btn bg-gradient-success btn-sm">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $('[data-bs-toggle="tooltip"]').tooltip();
+
+    });
+</script>

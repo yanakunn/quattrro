@@ -1,0 +1,85 @@
+﻿@model Project_AkmalRentals.Models.tb_building
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.Main = "Investment Lot";
+    ViewBag.Text = "Edit Lot Details";
+}
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">@ViewBag.Main</a></li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">@ViewBag.Title</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">@ViewBag.Title</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Search</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <a href="@Url.Action("Profile","Account", new { id = Session["uid"] })" class="nav-link text-body font-weight-bold px-0">
+                        <i class="fa fa-user me-sm-1"></i>
+                        <span class="d-sm-inline d-none">@Session["name"]</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+
+<div class="row">
+    <div class="col-md-6 col-6">
+        <div class="col-md-12 mb-lg-0 mb-4 offset-5">
+            <div class="card mt-4">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center">
+                            <h6 class="mb-3">@ViewBag.Text</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <div class="row">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="d-flex flex-column">
+                                <div class="card card-body border card-plain border-radius-lg d-flex">
+
+                                    <div class="form-horizontal">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.b_id)
+                                        @Html.HiddenFor(model => model.b_status)
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.b_name, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.b_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.b_name, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions mt-3">
+                                <a class="btn btn-outline-dark" href="@Url.Action("ViewLot")">Back</a>
+                                <input type="submit" value="Save" class="btn bg-gradient-success">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

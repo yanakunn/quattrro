@@ -1,0 +1,119 @@
+﻿@model Project_AkmalRentals.Models.tb_tenant
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .column1 {
+        width: 300px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.viewer.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.viewer.min.js"></script>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">TENANT DETAILS</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2 p-0">
+                    <dl class="dl-horizontal pb-2">
+                        <br />
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Location Code</th>
+                                        <td class="text-uppercase">@Html.DisplayFor(model => model.tb_room.tb_floor.y_location)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Address</th>
+                                        <td class="text-uppercase">@Html.DisplayFor(model => model.tb_room.tb_floor.y_address)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Room</th>
+                                        <td class="text-uppercase">NO. @Html.DisplayFor(model => model.tb_room.f_room)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Price</th>
+                                        <td class="text-uppercase">RM @Html.DisplayFor(model => model.tb_room.f_price)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Tenant Name </th>
+                                        <td class="text-uppercase">@Html.DisplayFor(model => model.t_name)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">I/C No.</th>
+                                        <td class="text-uppercase">@Html.DisplayFor(model => model.t_ic)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Contact Number</th>
+                                        <td class="text-uppercase">@Html.DisplayFor(model => model.t_contact)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Emergency Contact Number</th>
+                                        <td class="text-uppercase">@Html.DisplayFor(model => model.t_emergencyContact)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Check In Date</th>
+                                        <td class="text-uppercase">@Html.DisplayFor(model => model.t_chkinDate)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Check Out Date</th>
+                                        <td class="text-uppercase">@Html.DisplayFor(model => model.t_chkoutDate)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">No. of pax</th>
+                                        <td class="text-uppercase">@Html.DisplayFor(model => model.t_pax)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="column2"></td>
+                                        <th class="column1">Uploaded I/C Document</th>
+                                        <td class="resize-column">
+                                            <a href="javascript:void(0);" onclick="openFilePopup('@Url.Content("~/File/")@Model.t_ICdoc')">
+                                                <i class="fas fa-file"></i> Document
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <!-- Add more rows for other properties -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </dl>
+                </div>
+                <p>
+                    <span class="ms-sm-5  ">
+                        @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                        <a href="@Url.Action("Edit", new { id = Model.t_ic })" class="btn btn-dark-blue">Edit</a>
+
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
+<script>
+    function openFilePopup(url) {
+        window.open(url, "_blank", "width=800,height=600");
+    }
+</script>

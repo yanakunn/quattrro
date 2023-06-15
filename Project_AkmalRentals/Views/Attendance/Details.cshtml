@@ -1,0 +1,104 @@
+﻿@model Project_AkmalRentals.Models.tb_attendance
+@{
+    ViewBag.Title = "Details";
+    ViewBag.Main = "Attendance";
+    ViewBag.Text = "Add Attendance Details";
+}
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">@ViewBag.Main</a></li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">@ViewBag.Title</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">@ViewBag.Title</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Search</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <a href="@Url.Action("Profile","Account", new { id = Session["uid"] })" class="nav-link text-body font-weight-bold px-0">
+                        <i class="fa fa-user me-sm-1"></i>
+                        <span class="d-sm-inline d-none">@Session["name"]</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .column1 {
+        width: 300px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.viewer.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.viewer.min.js"></script>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">ATTENDANCE DETAILS</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        Cleaner
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.tb_cleaner.c_name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Attendance Date
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.att_date)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.tb_attendanceStatus.atts_desc)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <span class="ms-sm-5  ">
+                                @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                                <a href="@Url.Action("Edit", new { id = Model.att_id})" class="btn btn-dark-blue">Edit</a>
+
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

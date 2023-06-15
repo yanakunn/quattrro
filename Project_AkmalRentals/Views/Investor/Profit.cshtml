@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Project_AkmalRentals.Models.tb_profit>
+@using System.Globalization
+@{
+    ViewBag.Title = "Profit";
+    ViewBag.Main = "Investment Dashboard";
+
+}
+
+<!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">@ViewBag.Main</a></li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">@ViewBag.Title</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">@ViewBag.Title</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Search</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <a href="@Url.Action("Profile","Account", new { id = Session["uid"] })" class="nav-link text-body font-weight-bold px-0">
+                        <i class="fa fa-user me-sm-1"></i>
+                        <span class="d-sm-inline d-none">@Session["name"]</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+
+<div class="page-header min-height-200 border-radius-xl mt-4" style="background-image: url('/Content/assets/img/bg1.jpg');">
+    <h2 class="text-white mb-6" style="position: relative; z-index: 1; margin-left:280px;">Profit Distribution Summary</h2>
+    <span class="mask  bg-gradient-dark  opacity-6"></span>
+</div>
+
+<div class="row mt-4 mb-4">
+    <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+        <div class="card mx-3 mx-md-4 mt-n7">
+            <div class="card-body px-0 pb-2  pt-4 pt-3">
+                <div class="table-responsive">
+                    <div class="d-flex align-items-center">
+                        <div class="ms-auto">
+                            @{
+                                int currentYear = DateTime.Now.Year;
+                                List<int> years = Enumerable.Range(currentYear - 4, 6).ToList();
+                            }
+                            @{
+                                List<string> months = DateTimeFormatInfo.CurrentInfo.MonthNames.Where(m => !string.IsNullOrEmpty(m)).ToList();
+                            }
+                            <div class="d-flex justify-content-end">
+                                <div class="form-group mx-3">
+                                    <select id="yearFilter" class="form-select" aria-label="Year Filter">
+                                        <option value="">All Years &nbsp;&nbsp;</option>
+                                        @foreach (var year in years)
+                                        {
+                                            <option value="@year">@year</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group mx-3">
+                                    <select id="monthFilter" class="form-select" aria-label="Month Filter">
+                                        <option value="">All Months&nbsp;&nbsp;&nbsp;</option>
+                                        @foreach (var month in months)
+                                        {
+                                            <option value="@month">@month</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table align-items-center mb-0">
+                     
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7">Date</th>
+                                    <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7" data-bs-toggle="tooltip" data-bs-placement="top" title="Overall profit for room rentals">Total Profit</th>
+                                    <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7" data-bs-toggle="tooltip" data-bs-placement="top" title="40% of total profit">AR Profit</th>
+                                    <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7" data-bs-toggle="tooltip" data-bs-placement="top" title="60% of total profit">Profit For Distribution</th>
+                                    <th class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7" data-bs-toggle="tooltip" data-bs-placement="top" title="Profit for each partner">Partner Profit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.profit_date)</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-sm font-weight-bold">RM @Html.DisplayFor(modelItem => item.profit_amount)</span>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-sm font-weight-bold">RM @Html.DisplayFor(modelItem => item.profit_AR)</span>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-sm font-weight-bold">RM @Html.DisplayFor(modelItem => item.profit_inv)</span>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-sm font-weight-bold">RM @Html.DisplayFor(modelItem => item.profit_lot)</span>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            </table>
+
+                        </div>
+                        <div class="mx-3 mt-3">
+                            <a class="btn btn-outline-dark btn-sm" href="@Url.Action("InvDashboard")">Back</a>
+                        </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $('[data-bs-toggle="tooltip"]').tooltip();
+        
+        function filterTableRows() {
+            var yearFilter = $("#yearFilter").val();
+            var monthFilter = $("#monthFilter").val();
+
+            $("table tbody tr").each(function () {
+                var row = $(this);
+                var date = row.find("td:nth-child(1) h6").text().trim();
+                var year = date.split(" ")[1];
+                var month = date.split(" ")[0];
+
+                var yearMatch = yearFilter === "" || year === yearFilter;
+                var monthMatch = monthFilter === "" || month === monthFilter;
+
+                row.toggle(yearMatch && monthMatch);
+            });
+        }
+
+        $("#yearFilter, #monthFilter").on("change", function () {
+            filterTableRows();
+        });
+
+        filterTableRows();
+    });
+</script>
+

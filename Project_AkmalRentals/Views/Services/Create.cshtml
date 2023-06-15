@@ -1,0 +1,90 @@
+﻿@model Project_AkmalRentals.ViewModel.Services
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    .form-container {
+        padding-left: 20px; /* Adjust the value as needed */
+    }
+
+    .column1 {
+        width: 200px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">ADD NEW CLEANER</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <table class="table align-items-center mb-0">
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.c_name, "Name", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.EditorFor(model => model.c_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.c_name, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.c_company, "Agency", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.EditorFor(model => model.c_company, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.c_company, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.c_location, "Location", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.DropDownList("c_location", null, "Select a Location", htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.c_location, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <div class="form-group">
+                                    @Html.ActionLink("Return", "Service", null, new { @class = "btn btn-outline-dark" })
+
+                                    <input type="submit" value="Create" class="btn btn-dark-blue" />
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Project_AkmalRentals.ViewModel.CleanerAttendance>
+
+@{
+    ViewBag.Title = "AttendanceTable";
+    <!--Get number of days of current month-->
+    var DaysInmonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+    <!--Create a CurrentName field-->
+    var CurrentName = "";
+}
+
+
+<h2>Attendance Overview</h2>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<style>
+    .clickable-row:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+    }
+</style>
+<script>
+    function printTable() {
+        window.print();
+    }
+</script>
+
+<div class="my-1 me-5">
+    <input type="button" value="Manage Services" class="btn btn-outline-dark" onclick="@("window.location.href='" + @Url.Action("Service", "Services") + "'");" />
+    <input type="button" value="Attendance List" class="btn btn-outline-dark" onclick="@("window.location.href='" + @Url.Action("Index", "Attendance") + "'");" />
+    <input type="button" value="Generate PDF" class="btn btn-outline-dark" onclick="printTable()" ;" />
+</div>
+
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Cleaner List</h6>
+                    </div>
+                </div>
+
+
+
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <!--Loop all the days of month and print it-->
+                                    @for (var numb = 1; numb <= DaysInmonth; numb++)
+                                    {
+                                        <td>@numb</td>
+                                    }
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--Loop model-->
+                                @foreach (var cleaner in Model)
+                                {
+                                    //if Name is repeated, skip
+                                    if (CurrentName != cleaner.att_cleanerName)
+                                    {
+                                        //Set Name
+                                        CurrentName = cleaner.att_cleanerName;
+
+                                        <tr>
+                                            <!--print employee name one time only at the start of row-->
+                                            <td>@cleaner.att_cleanerName</td>
+
+
+                                            <!--loop all days of month-->
+                                            @for (var numb = 1; numb <= DaysInmonth; numb++)
+                                            {
+                                                <td>
+                                                    @{
+                                                        <!--print only that date time value which is equal to current date(as it will match column header) and current employee name, else print empty-->
+                                                        var GetThatDayValue = Model.FirstOrDefault(a => a.att_date?.Day == numb && a.att_cleanerName == cleaner.att_cleanerName && a.att_date?.Month == DateTime.Now.Month);
+                                                        var DD = GetThatDayValue != null && GetThatDayValue.att_date.HasValue ? "/" : "";
+                                                        <text> @DD </text>
+                                                    }
+                                                </td>
+                                            }
+
+
+                                        </tr>
+
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>var hostUrl = "assets/";</script>
+<!--begin::Global Javascript Bundle(used by all pages)-->
+<script src="~Content/assets/plugins/global/plugins.bundle.js"></script>
+<script src="~Content/assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Vendors Javascript(used by this page)-->
+<script src="~Content/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<!--end::Vendors Javascript-->
+<!--begin::Custom Javascript(used by this page)-->
+<script src="~Content/assets/js/custom/apps/ecommerce/reports/customer-orders/customer-orders.js"></script>
+<script src="~Content/assets/js/widgets.bundle.js"></script>
+<script src="~Content/assets/js/custom/widgets.js"></script>
+<script src="~Content/assets/js/custom/apps/chat/chat.js"></script>
+<script src="~Content/assets/js/custom/utilities/modals/users-search.js"></script>
+<!--end::Custom Javascript-->
+<!--end::Javascript-->
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+

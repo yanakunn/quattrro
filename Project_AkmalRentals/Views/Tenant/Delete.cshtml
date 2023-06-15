@@ -1,0 +1,61 @@
+﻿@model Project_AkmalRentals.Models.tb_tenant
+
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    .column1 {
+        width: 200px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h6 class="card-title text-uppercase mb-0">Are you sure you want to delete this?</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th class="column1"></th>
+                                <th class="column1">Tenant Name</th>
+                                <td>@Html.DisplayFor(model => model.t_name)</td>
+                            </tr>
+                            <tr>
+                                <th class="column1"></th>
+                                <th class="column1">I/C</th>
+                                <td>@Html.DisplayFor(model => model.t_ic)</td>
+                            </tr>
+                            <tr>
+                                <th class="column1"></th>
+                                <th class="column1">Location</th>
+                                <td>@Html.DisplayFor(model => model.tb_room.tb_floor.y_location)</td>
+                            </tr>
+                            <tr>
+                                <th class="column1"></th>
+                                <th class="column1">Room No.</th>
+                                <td>@Html.DisplayFor(model => model.tb_room.f_room)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions d-flex justify-content-between">
+                            @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

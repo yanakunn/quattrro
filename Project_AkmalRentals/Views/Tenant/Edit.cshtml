@@ -1,0 +1,138 @@
+﻿@model Project_AkmalRentals.Models.tb_tenant
+
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    .form-container {
+        padding-left: 20px; /* Adjust the value as needed */
+    }
+
+    .column1 {
+        width: 200px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+    /* Add more CSS rules for other columns as needed */
+</style>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">EDIT TENANT DETAILS</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2 p-0">
+                    @using (Html.BeginForm("Edit", "Tenant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal form-container">
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.t_ic)
+                            <table class="class=" table align-items-center mb-0"">
+                                <tbody>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.t_name, "Room", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                <span class="text-xs font-weight-bold"> @Html.DisplayFor(modelItem => Model.tb_room.tb_floor.y_location) / No  @Html.DisplayFor(modelItem => Model.tb_room.f_room)</span>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.t_name, "Tenant Full Name", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.EditorFor(model => model.t_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.t_name, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.t_contact, "Contact No", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.EditorFor(model => model.t_contact, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.t_contact, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.t_emergencyContact, "Emergency Contact No", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.EditorFor(model => model.t_emergencyContact, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.t_emergencyContact, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.t_chkinDate, "Check In Date", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.TextBoxFor(model => model.t_chkinDate, "{0:yyyy-MM-ddTHH:mm}", new { @type = "datetime-local", @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.t_chkinDate, "", new { @class = "text-danger" })
+                                                @ViewBag.Message
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.t_chkoutDate, "Check Out Date", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.TextBoxFor(model => model.t_chkoutDate, "{0:yyyy-MM-ddTHH:mm}", new { @type = "datetime-local", @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.t_chkoutDate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.t_pax, "Number of Pax", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.EditorFor(model => model.t_pax, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.t_pax, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                                                <input type="submit" value="Save" class="btn btn-dark-blue" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            @section Scripts {
+                                @Scripts.Render("~/bundles/jqueryval")
+
+                            }
+
+                        </div>}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

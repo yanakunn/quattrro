@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_akmalrentalsModelStoreContainer" CdmEntityContainer="db_akmalrentalsEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_attendance">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_attendance">
+        <MappingFragment StoreEntitySet="tb_attendance">
+          <ScalarProperty Name="att_status" ColumnName="att_status" />
+          <ScalarProperty Name="att_date" ColumnName="att_date" />
+          <ScalarProperty Name="att_cleanerID" ColumnName="att_cleanerID" />
+          <ScalarProperty Name="att_id" ColumnName="att_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_attendanceStatus">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_attendanceStatus">
+        <MappingFragment StoreEntitySet="tb_attendanceStatus">
+          <ScalarProperty Name="atts_desc" ColumnName="atts_desc" />
+          <ScalarProperty Name="atts_id" ColumnName="atts_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_building">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_building">
+        <MappingFragment StoreEntitySet="tb_building">
+          <ScalarProperty Name="b_status" ColumnName="b_status" />
+          <ScalarProperty Name="b_name" ColumnName="b_name" />
+          <ScalarProperty Name="b_id" ColumnName="b_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_category">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_category">
+        <MappingFragment StoreEntitySet="tb_category">
+          <ScalarProperty Name="cat_desc" ColumnName="cat_desc" />
+          <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_cleaner">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_cleaner">
+        <MappingFragment StoreEntitySet="tb_cleaner">
+          <ScalarProperty Name="c_location" ColumnName="c_location" />
+          <ScalarProperty Name="c_company" ColumnName="c_company" />
+          <ScalarProperty Name="c_name" ColumnName="c_name" />
+          <ScalarProperty Name="c_id" ColumnName="c_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_expenses">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_expenses">
+        <MappingFragment StoreEntitySet="tb_expenses">
+          <ScalarProperty Name="e_Receipt" ColumnName="e_Receipt" />
+          <ScalarProperty Name="e_Amount" ColumnName="e_Amount" />
+          <ScalarProperty Name="e_Detail" ColumnName="e_Detail" />
+          <ScalarProperty Name="e_Payment" ColumnName="e_Payment" />
+          <ScalarProperty Name="e_Category" ColumnName="e_Category" />
+          <ScalarProperty Name="e_Date" ColumnName="e_Date" />
+          <ScalarProperty Name="e_Type" ColumnName="e_Type" />
+          <ScalarProperty Name="e_id" ColumnName="e_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_floor">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_floor">
+        <MappingFragment StoreEntitySet="tb_floor">
+          <ScalarProperty Name="y_cctvqr" ColumnName="y_cctvqr" />
+          <ScalarProperty Name="y_desc" ColumnName="y_desc" />
+          <ScalarProperty Name="y_floor" ColumnName="y_floor" />
+          <ScalarProperty Name="y_address" ColumnName="y_address" />
+          <ScalarProperty Name="y_location" ColumnName="y_location" />
+          <ScalarProperty Name="y_id" ColumnName="y_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_inventory">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_inventory">
+        <MappingFragment StoreEntitySet="tb_inventory">
+          <ScalarProperty Name="v_quantity" ColumnName="v_quantity" />
+          <ScalarProperty Name="v_item" ColumnName="v_item" />
+          <ScalarProperty Name="v_location" ColumnName="v_location" />
+          <ScalarProperty Name="v_id" ColumnName="v_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_investor">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_investor">
+        <MappingFragment StoreEntitySet="tb_investor">
+          <ScalarProperty Name="i_lot" ColumnName="i_lot" />
+          <ScalarProperty Name="i_percentage" ColumnName="i_percentage" />
+          <ScalarProperty Name="i_investment" ColumnName="i_investment" />
+          <ScalarProperty Name="i_id" ColumnName="i_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_landlord">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_landlord">
+        <MappingFragment StoreEntitySet="tb_landlord">
+          <ScalarProperty Name="l_rentalAmount" ColumnName="l_rentalAmount" />
+          <ScalarProperty Name="l_ctrctEndDate" ColumnName="l_ctrctEndDate" />
+          <ScalarProperty Name="l_ctrctStartDate" ColumnName="l_ctrctStartDate" />
+          <ScalarProperty Name="l_location" ColumnName="l_location" />
+          <ScalarProperty Name="l_contact" ColumnName="l_contact" />
+          <ScalarProperty Name="l_name" ColumnName="l_name" />
+          <ScalarProperty Name="l_id" ColumnName="l_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_payment">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_payment">
+        <MappingFragment StoreEntitySet="tb_payment">
+          <ScalarProperty Name="p_receipt" ColumnName="p_receipt" />
+          <ScalarProperty Name="p_id" ColumnName="p_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_profit">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_profit">
+        <MappingFragment StoreEntitySet="tb_profit">
+          <ScalarProperty Name="profit_lot" ColumnName="profit_lot" />
+          <ScalarProperty Name="profit_inv" ColumnName="profit_inv" />
+          <ScalarProperty Name="profit_AR" ColumnName="profit_AR" />
+          <ScalarProperty Name="profit_date" ColumnName="profit_date" />
+          <ScalarProperty Name="profit_amount" ColumnName="profit_amount" />
+          <ScalarProperty Name="profit_id" ColumnName="profit_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_role">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_role">
+        <MappingFragment StoreEntitySet="tb_role">
+          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_room">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_room">
+        <MappingFragment StoreEntitySet="tb_room">
+          <ScalarProperty Name="f_status" ColumnName="f_status" />
+          <ScalarProperty Name="f_price" ColumnName="f_price" />
+          <ScalarProperty Name="f_room" ColumnName="f_room" />
+          <ScalarProperty Name="f_floor" ColumnName="f_floor" />
+          <ScalarProperty Name="f_id" ColumnName="f_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_share">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_share">
+        <MappingFragment StoreEntitySet="tb_share">
+          <ScalarProperty Name="share_investor" ColumnName="share_investor" />
+          <ScalarProperty Name="share_date" ColumnName="share_date" />
+          <ScalarProperty Name="share_amount" ColumnName="share_amount" />
+          <ScalarProperty Name="share_id" ColumnName="share_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_status">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_status">
+        <MappingFragment StoreEntitySet="tb_status">
+          <ScalarProperty Name="s_desc" ColumnName="s_desc" />
+          <ScalarProperty Name="s_id" ColumnName="s_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_tenant">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_tenant">
+        <MappingFragment StoreEntitySet="tb_tenant">
+          <ScalarProperty Name="t_pax" ColumnName="t_pax" />
+          <ScalarProperty Name="t_ICdoc" ColumnName="t_ICdoc" />
+          <ScalarProperty Name="t_room" ColumnName="t_room" />
+          <ScalarProperty Name="t_chkoutDate" ColumnName="t_chkoutDate" />
+          <ScalarProperty Name="t_chkinDate" ColumnName="t_chkinDate" />
+          <ScalarProperty Name="t_emergencyContact" ColumnName="t_emergencyContact" />
+          <ScalarProperty Name="t_contact" ColumnName="t_contact" />
+          <ScalarProperty Name="t_name" ColumnName="t_name" />
+          <ScalarProperty Name="t_ic" ColumnName="t_ic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_user">
+      <EntityTypeMapping TypeName="db_akmalrentalsModel.tb_user">
+        <MappingFragment StoreEntitySet="tb_user">
+          <ScalarProperty Name="u_role" ColumnName="u_role" />
+          <ScalarProperty Name="u_name" ColumnName="u_name" />
+          <ScalarProperty Name="u_pwd" ColumnName="u_pwd" />
+          <ScalarProperty Name="u_email" ColumnName="u_email" />
+          <ScalarProperty Name="u_id" ColumnName="u_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

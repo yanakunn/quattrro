@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Project_AkmalRentals.Models.tb_investor>
+
+@{
+    ViewBag.Title = "Investors";
+    ViewBag.Main = "Home";
+}
+
+<!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">@ViewBag.Main</a></li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">@ViewBag.Title</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">@ViewBag.Title</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Search</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <a href="@Url.Action("Profile","Account", new { id = Session["uid"] })" class="nav-link text-body font-weight-bold px-0">
+                        <i class="fa fa-user me-sm-1"></i>
+                        <span class="d-sm-inline d-none">@Session["name"]</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+
+<div class="page-header min-height-200 border-radius-xl mt-4" style="background-image: url('/Content/assets/img/bg1.jpg');">
+    <h2 class="text-white mb-6 offset-5" style="position: relative; z-index: 1;">Investors</h2>
+    <span class="mask  bg-gradient-dark  opacity-6"></span>
+</div>
+
+
+<div class="card card-body mx-3 mx-md-4 mt-n6">
+    <div class="row">
+        <div class="col-12 d-flex align-items-center">
+            <h6 class="card-header">Investors Information</h6>
+            <div class="ms-auto">
+                <a class="btn bg-gradient-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to view all lot" href="@Url.Action("ViewLot")">Lot</a>
+                <a class="btn bg-gradient-primary btn-sm" href="@Url.Action("Create")"><i class="material-icons text-sm">add</i>&nbsp;Investor</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body pt-4 p-3">
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                    <div class="d-flex flex-column">
+                        <h6 class="text-uppercase mb-3 text-sm">@Html.DisplayFor(modelItem => item.tb_user.u_name)</h6>
+                        <span class="mb-2 text-xs">@Html.DisplayNameFor(model => model.tb_user.u_email)<span class="text-dark font-weight-bold ms-sm-2">@Html.DisplayFor(modelItem => item.tb_user.u_email)</span></span>
+                        <span class="mb-2 text-xs">@Html.DisplayNameFor(model => model.i_investment)<span class="text-dark font-weight-bold ms-sm-2">RM @Html.DisplayFor(modelItem => item.i_investment)</span></span>
+                        <span class="mb-2 text-xs">@Html.DisplayNameFor(model => model.tb_building.b_name)<span class="text-dark ms-sm-2 font-weight-bold">@Html.DisplayFor(modelItem => item.tb_building.b_name)</span></span>
+                    </div>
+                    <div class="ms-auto text-end">
+                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="@Url.Action("Delete", new { id = item.i_id })"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+                    </div>
+                </li>
+            }
+        </ul>
+        <a class="btn btn-outline-dark btn-sm mt-5" href="@Url.Action("InvDashboard")">Back</a>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('[data-bs-toggle="tooltip"]').tooltip();
+
+    });
+</script>
