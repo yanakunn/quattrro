@@ -151,8 +151,17 @@ namespace AkmalRentals.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tb_floor tb_floor = db.tb_floor.Find(id);
-            db.tb_floor.Remove(tb_floor);
-            db.SaveChanges();
+            var floorCheck = db.tb_room.Where(f => f.f_floor == id).FirstOrDefault();
+            if (floorCheck == null)
+            {
+                db.tb_floor.Remove(tb_floor);
+                db.SaveChanges();
+            }
+            else
+            {
+                ViewBag.Error = "sorry, but you cannot delete a property that has rooms.";
+                return View(tb_floor);
+            }
             return RedirectToAction("Index");
         }
 

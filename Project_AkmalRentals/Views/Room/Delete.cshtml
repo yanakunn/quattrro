@@ -13,61 +13,52 @@
                         <h6 class="text-white text-capitalize text-white ps-3">Are you sure you want to delete this?</h6>
                     </div>
                 </div>
-                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
-                    <div class="table-responsive p-0">
-                        <div>
-                            <table class="table">
-                                <tr>
-                                    <th>
-                                        Floor
-                                    </th>
-                                    <td>
-                                        @Html.DisplayFor(model => model.tb_floor.y_location)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Room
-                                    </th>
-                                    <td>
-                                        @Html.DisplayFor(model => model.f_room)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Price (RM) 
-                                    </th>
-                                    <td>
-                                       RM @Html.DisplayFor(model => model.f_price)
-                                    </td>
-                                </tr>
-                                <tr>
-                                <tr>
-                                    <th>
-                                       Status
-                                    </th>
-                                    <td>
-                                        @Html.DisplayFor(model => model.tb_status.s_desc)
-                                    </td>
-                                </tr>
-                            </table>
- 
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-2">
+                        <div class="card card-body border card-plain border-radius-lg d-flex">
+                            <h6 class="text-uppercase mb-2">Room: No  @Html.DisplayFor(model => model.f_room)</h6>
+                            <span class="mb-2">Tenant:</span>
+                            @if (Model.tb_tenant.Any())
+                            {
+                                <ul>
+                                    @foreach (var tenant in Model.tb_tenant)
+                                    {
+                                        <li class="text-capitalize text-dark text-sm">Name: @tenant.t_name</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <span class="text-dark text-center">No tenant.</span>
+                            }
+                            @if (ViewBag.Error != null)
+                            {
+                                <div class="border border-0 p-2 mb-2 border-radius-lg text-white text-center alert-danger" style="margin-left: 5px;">
+                                    @ViewBag.Error
+                                </div>
+
+                            }
+                          
 
 
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
+                            <br />
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
 
-                            <div class="form-actions no-color">
-                                @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
-                                <input type="submit" value="Delete" class="btn btn-dark-blue" />
-                            </div>
-                        }
+                                <div class="form-actions no-color">
+                                    @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                                    <input type="submit" value="Delete" class="btn btn-dark-blue" />
+                                </div>
+                            }
 
+                        </div>
+                    </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
+
+
+                </div>
 </div>
     </div>

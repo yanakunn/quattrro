@@ -123,9 +123,19 @@ namespace AkmalRentals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             tb_room tb_room = db.tb_room.Find(id);
-            db.tb_room.Remove(tb_room);
-            db.SaveChanges();
+            var roomCheck = db.tb_tenant.Where(t => t.t_room == id).FirstOrDefault();
+            if (roomCheck == null)
+            {
+                db.tb_room.Remove(tb_room);
+                db.SaveChanges();
+            }
+            else
+            {
+                ViewBag.Error = "sorry, but you cannot delete a room that has tenants.";
+                return View(tb_room);
+            }
             return RedirectToAction("Index");
         }
 

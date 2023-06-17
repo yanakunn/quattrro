@@ -15,44 +15,54 @@
 </style>
 <div class="container py-4">
     <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header bg-dark-blue text-white">
-                    <h6 class="card-title text-uppercase text-white mb-0">Are you sure you want to delete this?</h6>
-                </div>
-                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
-                    <div class="table-responsive p-0">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <th>Floor</th>
-                                    <td>@Html.DisplayFor(model => model.y_floor)</td>
-                                </tr>
-                                <tr>
-                                    <th>Description</th>
-                                    <td>@Html.DisplayFor(model => model.y_desc)</td>
-                                </tr>
-                                <tr>
-                                    <th>CCTV QR</th>
-                                    <td>@Html.DisplayFor(model => model.y_cctvqr)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <br />
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="form-actions no-color">
-                                @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
-                                <input type="submit" value="Delete" class="btn btn-dark-blue" />
-                            </div>
-                        }
-
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-dark-blue shadow-dark border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize text-white ps-3">Are you sure you want to delete this?</h6>
                     </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-2">
+                            <div class="card card-body border card-plain border-radius-lg d-flex">
+                                <h6 class="text-uppercase mb-2">Property @Html.DisplayFor(model => model.y_location)</h6>
+                                <span class="mb-2">Rooms:</span>
+                                @if (Model.tb_room.Any())
+                                {
+                                    <ul>
+                                        @foreach (var room in Model.tb_room)
+                                        {
+                                            <li class="text-capitalize text-dark text-sm">No: @room.f_room</li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <span class="text-dark text-center">No room.</span>
+                                }
+                                @if (ViewBag.Error != null)
+                                {
+                                    <div class="border border-0 p-2 mb-2 border-radius-lg text-white text-center alert-danger" style="margin-left: 5px;">
+                                        @ViewBag.Error
+                                    </div>
+
+                                }
+
+                                <br />
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-actions no-color">
+                                        @Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-dark" })
+                                        <input type="submit" value="Delete" class="btn btn-dark-blue" />
+                                    </div>
+                                }
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
+
