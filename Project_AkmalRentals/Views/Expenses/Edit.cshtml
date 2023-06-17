@@ -15,7 +15,7 @@
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
-                        <h6 class="text-white text-capitalize ps-3">Edit</h6>
+                        <h6 class="text-white text-capitalize ps-3">Edit Expenses</h6>
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2" style="margin-left: 30px;">
@@ -27,7 +27,10 @@
                         <div class="form-group">
                             <label for="e_Type" class="control-label col-md-2">Type</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.e_Type, new { htmlAttributes = new { @class = "form-control" } })
+                                <select id="e_Type" name="e_Type" class="form-control">
+                                    <option value="Income">Income</option>
+                                    <option value="Expenses">Expenses</option>
+                                </select>
                                 @Html.ValidationMessageFor(model => model.e_Type, "", new { @class = "text-danger" })
                             </div>
                         </div>

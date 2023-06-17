@@ -17,6 +17,13 @@
         cursor: pointer;
         background-color: #f5f5f5;
     }
+
+    .custom-dropdown-menu {
+        border: 1px solid #ced4da; /* Outline color */
+        border-radius: 4px; /* Rounded corners */
+        padding: 0.5rem; /* Adjust the padding as needed */
+    }
+
 </style>
 <script>
     $(document).ready(function () {
@@ -101,11 +108,17 @@
                         <!-- Start Add New Income/Expenses-->
                         <div class="d-flex justify-content-between">
                             <div class="d-flex justify-content-start pe-3">
-                                <span class="ms-sm-3">
-                                    <a href="@Url.Action("Create")" class="material-symbols-outlined material-icons text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="+ Income/Expense">
-                                        add_box
-                                    </a>
-                                </span>
+                                    <div class="dropdown-header">
+                                        <span class="material-symbols-outlined material-icons text-dark cursor-pointer" data-bs-toggle="dropdown" data-bs-auto-close="outside" title="+ Income/Expense" id="addIncomeExpenseBtn">
+                                            add_box
+                                        </span>
+                                        <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="addIncomeExpenseBtn">
+                                            <li><a class="dropdown-item" href="@Url.Action("Create")">General</a></li>
+                                            <li><a class="dropdown-item" href="@Url.Action("Index", "Payment")">Tenant Rent</a></li>
+                                            <li><a class="dropdown-item" href="@Url.Action("Index", "Paycleaner")">Pay Cleaner</a></li>
+                                            <li><a class="dropdown-item" href="@Url.Action("Index", "Paylandlord")">Pay Landlord</a></li>
+                                        </ul>
+                                    </div>
                                 <span class="ms-sm-3">
                                     <a href="@Url.Action("Index", "Category")" class="material-symbols-outlined material-icons text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="+ Category">
                                         playlist_add
@@ -160,9 +173,8 @@
                         <table class="table align-items-center mb-0" id="expensesTable">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Type")</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">@Html.Label("Year")</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">@Html.Label("Month")</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Year")</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Month")</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Category")</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Payment")</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">@Html.Label("Detail")</th>
@@ -175,15 +187,15 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.e_id })">
-                                        <td class="align-middle">
+                                        <td class="hidden" style="display: none;">
                                             <div class="float-right">
                                                 @Html.DisplayFor(modelItem => item.e_Type)
                                             </div>
                                         </td>
-                                        <td class="align-middle"> 
+                                        <td class="align-middle text-center"> 
                                             <span>@item.e_Date.Year</span>
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="align-middle text-center">
                                             <span>@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.e_Date.Month)</span>
                                         </td>
 
@@ -219,7 +231,7 @@
                                         var expenses = Model.Where(e => e.e_Type == "Expenses").Sum(e => e.e_Amount);
                                         var profit = income - expenses;
                                     }
-                                    <td colspan="6"><strong>Profit</strong></td>
+                                    <td colspan="5" class="text-end"><strong>Profit:</strong></td>
                                     <td class="align-middle text-center total-amount" style="color: @(profit < 0 ? "red" : "green")">
                                         <strong>RM @(Math.Abs(profit))</strong>
                                     </td>
