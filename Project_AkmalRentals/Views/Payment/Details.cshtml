@@ -1,0 +1,66 @@
+﻿@model Project_AkmalRentals.Models.tb_payment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-warning shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">View Payment Tenant</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                    <div class="table-responsive p-0">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>@Html.DisplayFor(model => model.tb_tenant.t_name)</td>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <td>@(((DateTime)Model.p_Date).ToString("yyyy-MM-dd"))</td>
+                                </tr>
+                                <tr>
+                                    <th>Category</th>
+                                    <td>@Html.DisplayFor(model => model.tb_category.cat_desc)</td>
+                                </tr>
+                                <tr>
+                                    <th>Payment</th>
+                                    <td>@Html.DisplayFor(model => model.p_Payment)</td>
+                                </tr>
+                                <tr>
+                                    <th>Amount</th>
+                                    <td>@Html.DisplayFor(model => model.p_Amount)</td>
+                                </tr>
+                                <tr>
+                                    <th>Receipt</th>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(Model.p_Receipt))
+                                        {
+                                            <a href="javascript:void(0);" onclick="openFilePopup('@Url.Content("~/Receipt/")@Model.p_Receipt')">
+                                                <i class="fas fa-file"></i> @Model.p_Receipt
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(model => model.p_Receipt)
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.p_id }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-dark" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

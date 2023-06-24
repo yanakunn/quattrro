@@ -1,0 +1,126 @@
+﻿@model Project_AkmalRentals.Models.tb_payment
+
+@{
+    ViewBag.Title = "Edit";
+}
+<script>
+    // start for display file
+    function openFilePopup(url) {
+        window.open(url, "_blank", "width=800,height=600");
+    }
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">Edit Expenses</h6>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2" style="margin-left: 30px;">
+                        <div class="form-horizontal">
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.p_id)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.p_Date, "Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.p_Date, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.p_Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.p_Category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.p_Category, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.p_Category, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.p_Payment, "Payment", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.p_Payment, new SelectList(new[] { "Bank", "Cash" }), htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.p_Payment, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.p_TenantId, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("p_TenantId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.p_TenantId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.p_Amount, "Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.p_Amount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.p_Amount, "", new { @class = "text-danger" })
+                                    <span class="text-sm text-danger">@ViewBag.Error</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.p_Receipt, "Receipt", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.ValidationMessageFor(model => model.p_Receipt, "", new { @class = "text-danger" })
+                                    <a href="javascript:void(0);" onclick="openFilePopup('@Url.Content("~/Receipt/")@Model.p_Receipt')">
+                                        @if (!string.IsNullOrEmpty(Model.p_Receipt))
+                                        {
+                                            <i class="fas fa-file"></i> @Model.p_Receipt
+                                        }
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Save" class="btn bg-gradient-dark" />
+                                    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-outline dark" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    // Get the input element for the calendar control
+    var dateInput = document.getElementById("p_Date");
+
+    // Get the current date and format it as "YYYY-MM-DD" for comparison
+    var currentDate = new Date().toISOString().split("T")[0];
+
+    // Set the max attribute of the input element to prevent selection of dates before the current date
+    dateInput.setAttribute("min", currentDate);
+
+    // Attach an event listener to the input element to validate the selected date
+    dateInput.addEventListener("change", function (event) {
+        var selectedDate = event.target.value;
+
+        // Compare the selected date with the current date
+        if (selectedDate < currentDate) {
+            // Clear the selected date if it is a past date
+            event.target.value = "";
+        }
+    });
+</script>
