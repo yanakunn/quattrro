@@ -1,0 +1,275 @@
+﻿@model Project_AkmalRentals.Models.tb_expenses
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+    .nav-pills.nav-fill li {
+        flex: 1;
+        text-align: center;
+        font-size: 11px;
+    }
+
+        .nav-pills.nav-fill li.active a {
+            background-image: linear-gradient(to right, #002e63, #000000);
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+    .form-group label.control-label {
+        text-align: left;
+        font-size: 12px;
+    }
+
+    .form-horizontal .col-md-10 {
+        text-align: left;
+    }
+
+    .form-container {
+        padding-left: 20px; /* Adjust the value as needed */
+    }
+
+    .column1 {
+        width: 100px;
+    }
+
+    .column2 {
+        width: 50px;
+    }
+
+    .small-size {
+        font-size: 12px; /* Adjust the font size as needed */
+    }
+
+    .small-size-input {
+        padding: 0.25rem 0.25rem; /* Adjust the padding as needed */
+        font-size: 12px; /* Adjust the font size as needed */
+    }
+</style>
+
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card my-4">
+                <ul class="nav nav-pills nav-fill">
+                    <li class="active"><a href="#incomeTab" data-toggle="tab">Income</a></li>
+                    <li><a href="#expenseTab" data-toggle="tab">Expense</a></li>
+                </ul>
+                <div class="card-body px-0 pb-2 p-0">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="incomeTab">
+                            @using (Html.BeginForm("CreateIncome", "Expenses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal form-container">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <table class="class=" table align-items-center mb-0"">
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Date, "Date", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.EditorFor(model => model.e_Date, new { htmlAttributes = new { @class = "form-control small-size-input e_Date", type = "date", id = "e_Date", name = "e_Date", style = "height: 28px; font-size: 11px;" } })
+                                                    @Html.ValidationMessageFor(model => model.e_Date, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Category, "Category", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.DropDownList("e_Category", null, "-- Select Category --", htmlAttributes: new { @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" })
+                                                    @Html.ValidationMessageFor(model => model.e_Category, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Payment, "Payment", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.DropDownListFor(model => model.e_Payment, new SelectList(new[] { "Bank", "Cash" }), "-- Select Payment --", htmlAttributes: new { @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" })
+                                                    @Html.ValidationMessageFor(model => model.e_Payment, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Detail, "Detail", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.EditorFor(model => model.e_Detail, new { htmlAttributes = new { @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" } })
+                                                    @Html.ValidationMessageFor(model => model.e_Detail, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Amount, "Amount", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.EditorFor(model => model.e_Amount, new { htmlAttributes = new { @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" } })
+                                                    @Html.ValidationMessageFor(model => model.e_Amount, "", new { @class = "text-danger" })
+                                                    <span class="text-sm text-danger">@ViewBag.Error</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Receipt, "Receipt", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.TextBox("file", "", new { type = "file", @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" })
+                                                    @Html.ValidationMessageFor(model => model.e_Receipt, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <br />
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="+ Income" class="btn bg-gradient-dark" style="font-size: 10px; padding: 5px 10px;" />
+                                                    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-outline-dark", style = "font-size: 10px; padding: 5px 10px;" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="tab-pane" id="expenseTab">
+                            @using (Html.BeginForm("CreateExpense", "Expenses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal form-container">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <table class="class=" table align-items-center mb-0"">
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Date, "Date", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.EditorFor(model => model.e_Date, new { htmlAttributes = new { @class = "form-control small-size-input e_Date", type = "date", id = "e_Date", name = "e_Date", style = "height: 28px; font-size: 11px;" } })
+                                                    @Html.ValidationMessageFor(model => model.e_Date, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Category, "Category", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.DropDownList("e_Category", null, "-- Select Category --", htmlAttributes: new { @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" })
+                                                    @Html.ValidationMessageFor(model => model.e_Category, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Payment, "Payment", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.DropDownListFor(model => model.e_Payment, new SelectList(new[] { "Bank", "Cash" }), "-- Select Payment --", htmlAttributes: new { @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" })
+                                                    @Html.ValidationMessageFor(model => model.e_Payment, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Detail, "Detail", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.EditorFor(model => model.e_Detail, new { htmlAttributes = new { @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" } })
+                                                    @Html.ValidationMessageFor(model => model.e_Detail, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Amount, "Amount", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.EditorFor(model => model.e_Amount, new { htmlAttributes = new { @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" } })
+                                                    @Html.ValidationMessageFor(model => model.e_Amount, "", new { @class = "text-danger" })
+                                                    <span class="text-sm text-danger">@ViewBag.Error</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="column1">
+                                                @Html.LabelFor(model => model.e_Receipt, "Receipt", htmlAttributes: new { @class = "control-label", style = "font-size: 12px;" })
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-outline my-3 small-size">
+                                                    @Html.TextBox("file", "", new { type = "file", @class = "form-control small-size-input", style = "height: 28px; font-size: 11px;" })
+                                                    @Html.ValidationMessageFor(model => model.e_Receipt, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <br />
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="+ Expense" class="btn bg-gradient-dark" style="font-size: 10px; padding: 5px 10px;" />
+                                                    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-outline-dark", style = "font-size: 10px; padding: 5px 10px;" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to set the maximum date for the calendar controls
+    function setMaxDate() {
+        // Get all elements with the class "e_Date"
+        var dateInputs = document.getElementsByClassName("e_Date");
+
+        var currentDate = new Date().toISOString().split("T")[0];
+
+        // Set the max attribute for each date input to tomorrow's date
+        for (var i = 0; i < dateInputs.length; i++) {
+            dateInputs[i].setAttribute("max", currentDate);
+        }
+    }
+
+    // Call the function initially to set the max date
+    setMaxDate();
+
+    // Attach an event listener to the document to update the max date when the value of any date input changes
+    document.addEventListener("change", function (event) {
+        if (event.target.classList.contains("e_Date")) {
+            setMaxDate();
+        }
+    });
+</script>
