@@ -11,19 +11,14 @@ namespace Project_AkmalRentals.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class tb_inventory
     {
-        [DisplayName("Inventory ID")]
         public int v_id { get; set; }
-        [DisplayName("Location")]
         public Nullable<int> v_location { get; set; }
-        [DisplayName("Item")]
         public string v_item { get; set; }
-        [DisplayName("Quantity")]
         public Nullable<int> v_quantity { get; set; }
-
+    
         public virtual tb_floor tb_floor { get; set; }
     }
 }

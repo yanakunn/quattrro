@@ -35,7 +35,7 @@
                                 @Html.HiddenFor(model => model.f_id)
 
                                 <table class="table align-items-center mb-0">
-                                   
+
                                     <tr>
                                         <th class="column1">
                                             @Html.LabelFor(model => model.tb_floor.y_location, "Floor", htmlAttributes: new { @class = "control-label" })
@@ -55,8 +55,8 @@
                                             <div class="input-group input-group-outline my-3">
                                                 @Html.EditorFor(model => model.f_room, new { htmlAttributes = new { @class = "form-control" } })
                                                 @Html.ValidationMessageFor(model => model.f_room, "", new { @class = "text-danger" })
-                                                </div>
-</td>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th class="column1">
@@ -66,7 +66,29 @@
                                             <div class="input-group input-group-outline my-3">
                                                 @Html.EditorFor(model => model.f_price, new { htmlAttributes = new { @class = "form-control" } })
                                                 @Html.ValidationMessageFor(model => model.f_price, "", new { @class = "text-danger" })
-                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.f_doorID, "Access Door User ID", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.EditorFor(model => model.f_doorID, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.f_doorID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="column1">
+                                            @Html.LabelFor(model => model.f_cardNo, "Access Card Serial No", htmlAttributes: new { @class = "control-label" })
+                                        </th>
+                                        <td>
+                                            <div class="input-group input-group-outline my-3">
+                                                @Html.EditorFor(model => model.f_cardNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.f_cardNo, "", new { @class = "text-danger" })
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -77,8 +99,8 @@
                                             <div class="input-group input-group-outline my-3">
                                                 @Html.DropDownList("f_status", null, htmlAttributes: new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.f_status, "", new { @class = "text-danger" })
-                                                </div>
-</td>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </table>
 

@@ -39,19 +39,22 @@
                                     </th>
                                     <td>
                                         <div class="input-group input-group-outline my-3">
-                                            @Html.DropDownList("f_floor", null,"-- Select Location --", new { @class = "form-control" })
+                                            @Html.DropDownList("f_floor", null, "-- Select Location --", new { @class = "form-control", required = "required" })
                                             @Html.ValidationMessageFor(model => model.tb_floor.y_location, "", new { @class = "text-danger" })
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="column1">
-                                        @Html.LabelFor(model => model.f_room, "Room", htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(model => model.f_room, "Room", htmlAttributes: new { @class = "control-label"})
                                     </th>
                                     <td>
                                         <div class="input-group input-group-outline my-3">
-                                            @Html.EditorFor(model => model.f_room, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.f_room, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.f_room, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+
+                                        </div>
+                                        <div class="text-danger">
+                                            @ViewBag.RoomError
                                         </div>
                                     </td>
                                 </tr>
@@ -60,9 +63,31 @@
                                         @Html.LabelFor(model => model.f_price, "Price (RM)", htmlAttributes: new { @class = "control-label" })
                                     </th>
                                     <td>
-                                        <div class="input-group input-group-outline my-3">                                            
-                                            @Html.EditorFor(model => model.f_price, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.EditorFor(model => model.f_price, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                                             @Html.ValidationMessageFor(model => model.f_price, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="column1">
+                                        @Html.LabelFor(model => model.f_doorID, "Access Door User ID", htmlAttributes: new { @class = "control-label" })
+                                    </th>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.EditorFor(model => model.f_doorID, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.f_doorID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="column1">
+                                        @Html.LabelFor(model => model.f_cardNo, "Access Card Serial No", htmlAttributes: new { @class = "control-label" })
+                                    </th>
+                                    <td>
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.EditorFor(model => model.f_cardNo, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.f_cardNo, "", new { @class = "text-danger" })
                                         </div>
                                     </td>
                                 </tr>
@@ -72,7 +97,7 @@
                                     </th>
                                     <td>
                                         <div class="input-group input-group-outline my-3">
-                                            @Html.DropDownList("f_status", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.DropDownList("f_status", null, htmlAttributes: new { @class = "form-control", required = "required" })
                                             @Html.ValidationMessageFor(model => model.f_status, "", new { @class = "text-danger" })
                                         </div>
                                     </td>

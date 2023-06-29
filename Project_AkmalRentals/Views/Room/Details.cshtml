@@ -34,7 +34,7 @@
                                         Location Code
                                     </th>
                                     <td>
-                                        @Html.DisplayFor(model => model.f_floor)
+                                        @Html.DisplayFor(model => model.tb_floor.y_location)
                                     </td>
                                 </tr>
                                 <tr>
@@ -51,6 +51,22 @@
                                     </th>
                                     <td>
                                         RM @Html.DisplayFor(model => model.f_price)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Access Door User ID
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.f_doorID)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Access Card Serial No
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(model => model.f_cardNo)
                                     </td>
                                 </tr>
                                 <tr>

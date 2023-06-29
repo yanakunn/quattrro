@@ -57,7 +57,9 @@
         height: auto;
         object-fit: contain;
     }
-
+    .column1 {
+        width: 100px;
+    }
 
 
 </style>
@@ -119,10 +121,11 @@
                         <table class="table table-sm text-center">
                             <thead>
                                 <tr>
-                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">CCTV QR</th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">FLOOR</th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">LOCATION</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">ADDRESS</th>
                                     <th class="text-secondary text-uppercase text-xs font-weight-bolder opacity-7">DESCRIPTION</th>
+                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">PRESET</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
@@ -130,12 +133,6 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-
-                                        <td>
-                                            <a href="#" data-toggle="modal" data-target="#myModal2">
-                                                <img src="@Url.Content("~/Layout/" + item.y_cctvqr)" class="img-thumbnail" style="max-width: 100px; max-height: 100px;" />
-                                            </a>
-                                        </td>
                                         <td>
                                             <a href="#" data-toggle="modal" data-target="#myModal1">
                                                 <img src="@Url.Content("~/Layout/" + item.y_floor)" class="img-thumbnail" style="max-width: 100px; max-height: 100px;" />
@@ -145,7 +142,15 @@
                                             @Html.DisplayFor(modelItem => item.y_location)
                                         </td>
                                         <td>
+                                            @Html.DisplayFor(modelItem => item.y_address)
+                                        </td>
+                                        <td>
                                             @Html.DisplayFor(modelItem => item.y_desc)
+                                        </td>
+                                        <td class="column1">
+                                            <pre>
+                                            @Html.DisplayFor(modelItem => item.y_preset)
+                                            </pre>
                                         </td>
                                         <td class="align-middle text-center">
                                             <a href="@Url.Action("Edit", new { id = item.y_id })" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Layout">edit</a>
@@ -173,16 +178,6 @@
                             </div>
                         </div>
 
-                        <!-- Modal 2 for the second image -->
-                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <img src="" id="modalImage2" class="fixed-image-size" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
 
 

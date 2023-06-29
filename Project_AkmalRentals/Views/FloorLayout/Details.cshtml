@@ -6,7 +6,10 @@
     ViewBag.Title = "Details Floor Layout";
 
 }
+<style>
+  
 
+</style>
 <h3>Layout Details</h3>
 @ViewBag.status
 <div class="container-fluid py-4">
@@ -26,7 +29,7 @@
                                     <th>
                                         Image
                                     </th>
-                                    
+
                                     <td>
 
                                         @if (Model.y_location == "GE1")
@@ -226,7 +229,7 @@
                                         Floor
                                     </th>
                                     <td>
-                                        @Html.DisplayFor(model => model.y_floor)
+                                        @Html.DisplayFor(model => model.y_location)
                                     </td>
                                 </tr>
                                 <tr>
@@ -239,10 +242,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        CCTV QR
+                                        Bank Account
                                     </th>
                                     <td>
-                                        @Html.DisplayFor(model => model.y_cctvqr)
+                                        @Html.DisplayFor(model => model.y_preset)
                                     </td>
                                 </tr>
                             </tbody>
@@ -258,5 +261,12 @@
         </div>
     </div>
 </div>
+<script>
+  var areaElement = document.getElementById("area1");
+  var status = 1; // Replace with the actual status value
 
+  if (status === 1) {
+    areaElement.setAttribute("style", "background-color: green;");
+  }
+</script>
 

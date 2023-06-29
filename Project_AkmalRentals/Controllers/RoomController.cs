@@ -51,15 +51,23 @@ namespace AkmalRentals.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "f_id,f_floor,f_room,f_price,f_status")] tb_room tb_room)
+        public ActionResult Create([Bind(Include = "f_id,f_floor,f_room,f_price,f_doorID,f_cardNo,f_status")] tb_room tb_room)
         {
             if (ModelState.IsValid)
             {
-                db.tb_room.Add(tb_room);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (tb_room.f_room > 0)
+                {
+                    db.tb_room.Add(tb_room);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                    
+                }
+
+               ViewBag.RoomError = "Please enter a valid value for Room.";
+               
             }
-			ViewBag.f_floor = new SelectList(db.tb_floor, "y_id", "y_location", tb_room.f_floor);
+
+            ViewBag.f_floor = new SelectList(db.tb_floor, "y_id", "y_location", tb_room.f_floor);
 			ViewBag.f_status = new SelectList(db.tb_status, "s_id", "s_desc", tb_room.f_status);
             return View(tb_room);
         }
@@ -87,7 +95,7 @@ namespace AkmalRentals.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "f_id,f_floor,f_room, f_price,f_status")] tb_room tb_room)
+        public ActionResult Edit([Bind(Include = "f_id,f_floor,f_room,f_price,f_doorID,f_cardNo,f_status")] tb_room tb_room)
         {
             if (ModelState.IsValid)
             {
@@ -97,6 +105,8 @@ namespace AkmalRentals.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+           
 
             ViewBag.f_floor = new SelectList(db.tb_floor, "y_id", "y_location", tb_room.f_floor);
             ViewBag.f_status = new SelectList(db.tb_status, "s_id", "s_desc", tb_room.f_status);

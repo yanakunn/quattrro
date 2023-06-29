@@ -11,8 +11,7 @@ namespace Project_AkmalRentals.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class tb_floor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,19 +22,13 @@ namespace Project_AkmalRentals.Models
             this.tb_landlord = new HashSet<tb_landlord>();
             this.tb_room = new HashSet<tb_room>();
         }
-
-        [DisplayName("Floor ID")]
+    
         public int y_id { get; set; }
-        [DisplayName("Location")]
         public string y_location { get; set; }
-        [DisplayName("Address")]
         public string y_address { get; set; }
-        [DisplayName("Floor")]
         public string y_floor { get; set; }
-        [DisplayName("Description")]
         public string y_desc { get; set; }
-        [DisplayName("CCTV QR")]
-        public string y_cctvqr { get; set; }
+        public string y_preset { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_cleaner> tb_cleaner { get; set; }

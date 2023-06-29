@@ -131,6 +131,8 @@
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Location Code</th>
                                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Room</th>
                                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Price</th>
+                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Access Door User ID</th>
+                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Access Card Serial No</th>
                                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
@@ -147,6 +149,12 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             RM @Html.DisplayFor(modelItem => item.f_price)
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @Html.DisplayFor(modelItem => item.f_doorID)
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @Html.DisplayFor(modelItem => item.f_cardNo)
                                         </td>
                                         <td class="align-middle text-center">
                                             @Html.DisplayFor(modelItem => item.tb_status.s_desc)

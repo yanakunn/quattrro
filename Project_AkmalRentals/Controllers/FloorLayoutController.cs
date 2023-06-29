@@ -53,23 +53,18 @@ namespace AkmalRentals.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( tb_floor tb_floor, HttpPostedFileBase file1, HttpPostedFileBase file2)
+        public ActionResult Create( tb_floor tb_floor, HttpPostedFileBase file1)
         {
             if (ModelState.IsValid)
             {
                 if (file1 != null && file1.ContentLength > 0)
                 {
-                    if (file2 != null && file2.ContentLength > 0)
-                    {
+                    
                         string _FileName1 = Path.GetFileName(file1.FileName);
-                        string _FileName2 = Path.GetFileName(file2.FileName);
                         string _path1 = Path.Combine(Server.MapPath("~/Layout"), _FileName1);
-                        string _path2 = Path.Combine(Server.MapPath("~/Layout"), _FileName2);
                         file1.SaveAs(_path1);
-                        file2.SaveAs(_path2);
                         tb_floor.y_floor = _FileName1;
-                        tb_floor.y_cctvqr = _FileName2;
-                    }
+                   
                        
 
 
@@ -89,12 +84,12 @@ namespace AkmalRentals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tb_floor tb_layout = db.tb_floor.Find(id);
-            if (tb_layout == null)
+            tb_floor tb_floor = db.tb_floor.Find(id);
+            if (tb_floor == null)
             {
                 return HttpNotFound();
             }
-            return View(tb_layout);
+            return View(tb_floor);
         }
 
         // POST: FloorLayout/Edit/5
@@ -102,28 +97,13 @@ namespace AkmalRentals.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "y_id,y_location,y_floor,y_desc,y_cctvqr")] tb_floor tb_floor, HttpPostedFileBase file1, HttpPostedFileBase file2)
+        public ActionResult Edit(tb_floor tb_floor)
         {
             if (ModelState.IsValid)
             {
-                if (file1 != null && file1.ContentLength > 0)
-                {
-                    if (file2 != null && file2.ContentLength > 0)
-                    {
-                        string _FileName1 = Path.GetFileName(file1.FileName);
-                        string _FileName2 = Path.GetFileName(file2.FileName);
-                        string _path1 = Path.Combine(Server.MapPath("~/Layout"), _FileName1);
-                        string _path2 = Path.Combine(Server.MapPath("~/Layout"), _FileName2);
-                        file1.SaveAs(_path1);
-                        file2.SaveAs(_path2);
-                        tb_floor.y_floor = _FileName1;
-                        tb_floor.y_cctvqr = _FileName2;
-                    }
-
-
-
-                }
+                
                 db.Entry(tb_floor).State = EntityState.Modified;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

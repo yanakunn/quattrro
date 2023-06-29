@@ -34,40 +34,48 @@
                         <table class="table align-items-center mb-0">
                             <tbody>
                                 <tr>
-                                    <td class="column1">@Html.LabelFor(model => model.y_location, "Location", htmlAttributes: new { @class = "control-label" })</td>
+                                    <th class="column1">
+                                        @Html.LabelFor(model => model.y_location, "Location", htmlAttributes: new { @class = "control-label" })
+                                    </th>
                                     <td>
                                         <div class="input-group input-group-outline my-3">
-                                            @Html.EditorFor(model => model.y_location, "", new { @class = "form-control" })
+                                            @Html.EditorFor(model => model.y_location, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                                             @Html.ValidationMessageFor(model => model.y_location, "", new { @class = "text-danger" })
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="column1">@Html.LabelFor(model => model.y_address, "Address", htmlAttributes: new { @class = "control-label" })</td>
+                                    <th class="column1">
+                                        @Html.LabelFor(model => model.y_address, "Address", htmlAttributes: new { @class = "control-label" })
+                                    </th>
                                     <td>
-                                        <div class="input-group input-group-outline my-3">
-                                            @Html.EditorFor(model => model.y_address, "", new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.y_address, "", new { @class = "text-danger" })
-                                        </div>
-                                    </td>
+                                        @Html.ValidationMessageFor(model => model.y_address, "Example: 11-1, JLN DATARAN LARKIN 1", new { @class = "text-danger" })
+                                                                        <div class="input-group input-group-outline my-3">
+                                                                            @Html.EditorFor(model => model.y_address, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+
+                                                                        </div>
+                                                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="column1">@Html.LabelFor(model => model.y_floor, "Floor Layout", htmlAttributes: new { @class = "control-label" })</td>
                                     <td>
-                                        @Html.TextBox("file1", "", new { type = "file", @class = "form-control" })
+                                        @Html.TextBox("file1", "", new { type = "file", @class = "form-control", required = "required" })
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="column1">@Html.LabelFor(model => model.y_desc, "Description", htmlAttributes: new { @class = "control-label" })</td>
                                     <td>
-                                        @Html.TextAreaFor(model => model.y_desc, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.y_desc, "", new { @class = "text-danger" })
+                                        <div class="input-group input-group-outline my-3">
+                                            @Html.TextAreaFor(model => model.y_desc, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.y_desc, "", new { @class = "text-danger" })
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="column1">@Html.LabelFor(model => model.y_cctvqr, "CCTV QR", htmlAttributes: new { @class = "control-label" })</td>
+                                    <td class="column1">@Html.LabelFor(model => model.y_preset, "Preset", htmlAttributes: new { @class = "control-label" })</td>
                                     <td>
-                                        @Html.TextBox("file2", "", new { type = "file", @class = "form-control" })
+                                        @Html.TextAreaFor(model => model.y_preset, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.y_preset, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
